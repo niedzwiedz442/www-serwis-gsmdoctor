@@ -1,17 +1,16 @@
 ---
-import { Font } from "astro:assets";
+
 ---
+
 <html lang="pl-PL">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>Serwis GSMdoctor</title>
+    <title>Serwis GSMdoctor</title>
 
-		<Font cssVariable="--font-inter" />
-
-	</head>
-	<body style="font-family: var(--font-inter);">
-		<slot />
-	</body>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>

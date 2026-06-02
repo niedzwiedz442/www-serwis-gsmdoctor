@@ -1,10 +1,20 @@
 ---
+import "../styles/global.css";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import BrandTile from '../components/BrandTile.astro';
+import Footer from '../components/Footer.astro';
 ---
 <BaseLayout>
     <Header />
     <div class="container">
-        
+        <div class="main">
+            <h2 class="primary-color text-xl font-bold">Wybierz markę telefonu do naprawy</h2>
+            <div class="brands-grid">
+                <BrandTile brand="Apple" />
+                <BrandTile brand="Samsung" />
+            </div>
+        </div>
     </div>
+    <Footer />
 </BaseLayout>

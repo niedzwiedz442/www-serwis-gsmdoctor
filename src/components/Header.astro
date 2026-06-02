@@ -1,12 +1,6 @@
 ---
-import "../styles/global.css";
-import { Font } from "astro:assets";
+
 ---
-
-<head>
-  <Font cssVariable="--font-bitsumishi" />
-</head>
-
 <!-- Navbar -->
 <div class="flex items-center justify-between px-4 py-1 bg-primary text-white border-b-3 border-secondary">
   <a href="/">
@@ -18,9 +12,3 @@ import { Font } from "astro:assets";
     <a href="#" class="hover:text-(--secondary-color)">Kontakt</a>
   </nav>
 </div>
-
-<style>
-  .logo {
-    font-family: var(--font-bitsumishi);
-  }
-</style>
