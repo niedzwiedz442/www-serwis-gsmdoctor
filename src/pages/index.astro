@@ -1,6 +1,4 @@
 ---
-import "../styles/global.css";
-import "../styles/fonts.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import BrandTile from "../components/BrandTile.astro";
@@ -8,33 +6,34 @@ import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout>
-    <Header />
-    <div class="hero p-10">
-        <div class="container mx-auto text-center py-16">
-            <h1 class="text-4xl text-white font-bold mb-6 text-shadow-lg">
-                Profesjonalna naprawa telefonów
-            </h1>
-            <a href="#" type="button"
-                class="cta-button bg-primary text-white px-6 py-3 rounded-lg transition-all duration-100">
-                Umów naprawę
-            </a>
-        </div>
+  <Header />
+  <div class="hero p-10">
+    <div class="container mx-auto text-center py-16">
+      <h1 class="text-4xl text-white font-bold mb-6 text-shadow-lg">
+        Profesjonalna naprawa telefonów
+      </h1>
+      <a
+        href="#"
+        class="bg-red-600 hover:bg-red-800 lato-bold text-white px-6 py-3 rounded-lg transition-colors"
+      >
+        Umów naprawę
+      </a>
     </div>
-    <div class="main flex flex-col items-center py-12">
-        <div class="brands-grid grid grid-cols-2 gap-6">
-            <BrandTile brand="Apple" />
-            <BrandTile brand="Samsung" />
-        </div>
+  </div>
+  <main class="flex flex-col items-center py-12">
+    <div class="brands-grid grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <BrandTile brand="Apple" />
+      <BrandTile brand="Samsung" />
     </div>
-    <Footer />
+  </main>
+  <Footer />
 </BaseLayout>
 
 <style>
-    h2 {
-        font-weight: 700;
-    }
-    .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/hero-bg.jpg') no-repeat center center;
-        background-size: cover;
-    }
+  .hero {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url("/images/hero-bg.jpg") no-repeat center center;
+    background-size: cover;
+  }
 </style>

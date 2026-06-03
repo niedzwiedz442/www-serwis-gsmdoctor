@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+import "../styles/fonts.css";
 import { Font } from "astro:assets";
 ---
 
@@ -20,11 +22,11 @@ import { Font } from "astro:assets";
 
     <style>
       body {
-        background: #e3e3e3;
+        background: #fafafa;
       }
     </style>
   </head>
-  <body class="lato-regular">
+  <body class="lato-regular pb-24">
     <slot />
   </body>
 </html>

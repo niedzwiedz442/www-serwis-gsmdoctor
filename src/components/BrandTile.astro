@@ -6,7 +6,7 @@ const { brand } = Astro.props;
   <div class="brand-tile bg-white flex flex-col items-center p-4 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-pointer">
 
     <img src={`/logos/${brand.toLowerCase()}.png`} alt={`${brand} logo`} />
-    <h3 class="lato-bold text-xl primary-color">{brand}</h3>
+    <h3 class="lato-bold text-xl text-red-600">{brand}</h3>
     
   </div>
 </a>
