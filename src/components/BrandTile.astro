@@ -3,5 +3,6 @@ const { brand } = Astro.props;
 ---
 
 <div class="brand-tile">
+  <img src={`/logos/${brand.toLowerCase()}.png`} alt={`${brand} logo`} class="" />
   <h3>{brand}</h3>
 </div>

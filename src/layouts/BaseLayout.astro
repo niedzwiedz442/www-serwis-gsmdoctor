@@ -1,5 +1,5 @@
 ---
-
+import { Font } from "astro:assets";
 ---
 
 <html lang="pl-PL">
@@ -9,6 +9,15 @@
 
     <title>Serwis GSMdoctor</title>
 
+    <Font cssVariable="--font-inter" />
+    <Font cssVariable="--font-bitsumishi" />
+
+    <style>
+      body {
+        font-family: var(--font-inter);
+        background-color: #e3e3e3;
+      }
+    </style>
   </head>
   <body>
     <slot />
