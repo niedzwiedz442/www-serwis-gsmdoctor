@@ -16,10 +16,6 @@ export default defineConfig({
         style: "normal"
       }]
     }
-  },
-  {
-    provider: fontProviders.fontsource(),
-    name: "Inter",
-    cssVariable: "--font-inter",
-  }]
+  }
+  ]
 });
