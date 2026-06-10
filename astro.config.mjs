@@ -5,6 +5,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  // Import customowej czcionki
   fonts: [{
     provider: fontProviders.local(),
     name: "Bitsumishi",
@@ -16,6 +17,5 @@ export default defineConfig({
         style: "normal"
       }]
     }
-  }
-  ]
+  }]
 });
