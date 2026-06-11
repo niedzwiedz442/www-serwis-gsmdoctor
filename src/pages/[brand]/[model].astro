@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { hygraphQuery, toSlug } from "../../lib/hygraph";
+import { GET_ALL_MODEL_PATHS, GET_MODEL_WITH_REPAIRS } from "../../lib/queries";
+import type { PhoneModel } from "../../lib/queries";
+
+export async function getStaticPaths() {
+  const data = await hygraphQuery<{
+    models: { slug: string; brand: { name: string } }[];
+  }>(GET_ALL_MODEL_PATHS);
+
+  return data.models.map((model) => ({
+    params: {
+      brand: toSlug(model.brand.name),
+      model: model.slug,
+    },
+  }));
+}
+
+const { model: modelSlug, brand: brandSlug } = Astro.params;
+
+const data = await hygraphQuery<{ model: PhoneModel }>(
+  GET_MODEL_WITH_REPAIRS,
+  { slug: modelSlug }
+);
+
+const phoneModel = data.model;
+
+function formatPrice(price: number): string {
+  return `${price} zł`;
+}
+---
+
+<BaseLayout title={`Naprawa ${phoneModel.name} – GSMdoctor`}>
+  <Header />
+
+  <main class="container mx-auto py-12 px-4 max-w-3xl">
+
+    <nav class="text-sm text-gray-500 mb-8" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-red-600 transition-colors">Strona główna</a>
+      <span class="mx-2">/</span>
+      <a href={`/${brandSlug}`} class="hover:text-red-600 transition-colors">
+        {phoneModel.brand.name}
+      </a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-900 font-medium">{phoneModel.name}</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-1">Naprawa {phoneModel.name}</h1>
+    <p class="text-gray-500 mb-10">
+      Poniżej znajdziesz wszystkie dostępne naprawy wraz z cenami.
+    </p>
+
+    {phoneModel.repairServices.length === 0 ? (
+      <p class="text-gray-400 italic">Brak napraw w bazie dla tego modelu.</p>
+    ) : (
+      <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wide">
+              <th class="text-left px-5 py-3 border-b">Rodzaj naprawy</th>
+              <th class="text-left px-5 py-3 border-b hidden sm:table-cell">Opis</th>
+              <th class="text-right px-5 py-3 border-b">Cena</th>
+            </tr>
+          </thead>
+          <tbody>
+            {phoneModel.repairServices.map((repair, i) => (
+              <tr class:list={["hover:bg-red-50 transition-colors", i % 2 === 0 ? "bg-white" : "bg-gray-50/50"]}>
+                <td class="px-5 py-4 border-b font-semibold text-gray-900">
+                  {repair.serviceName}
+                </td>
+                <td class="px-5 py-4 border-b text-gray-500 hidden sm:table-cell">
+                  {repair.serviceDescription ?? "—"}
+                </td>
+                <td class="px-5 py-4 border-b text-right font-bold text-red-600 whitespace-nowrap">
+                  {formatPrice(repair.price)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        <a href={`/${brandSlug}`} class="text-gray-500 hover:text-gray-800 text-sm transition-colors">
+        ← Wróć do listy modeli
+      </a>
+      <a href="#" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+        Umów naprawę
+      </a>
+    </div>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
