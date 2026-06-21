@@ -3,30 +3,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { hygraphQuery, toSlug } from "../lib/hygraph";
-import { GET_BRANDS, GET_BRAND_WITH_MODELS } from "../lib/queries";
+import { GET_BRANDS } from "../lib/queries";
 import type { Brand } from "../lib/queries";
 
 export async function getStaticPaths() {
-  const data = await hygraphQuery<{ brands: Pick<Brand, "name">[] }>(GET_BRANDS);
+  const data = await hygraphQuery<{ brands: Brand[] }>(GET_BRANDS);
 
   return data.brands.map((brand) => ({
     params: {
       brand: toSlug(brand.name),
     },
     props: {
-      brandName: brand.name,
+      brandData: brand,
     },
   }));
 }
 
-const { brandName } = Astro.props;
+const { brandData } = Astro.props as { brandData: Brand };
 const { brand: brandSlug } = Astro.params;
-
-const data = await hygraphQuery<{ brand: Brand }>(GET_BRAND_WITH_MODELS, {
-  name: brandName,
-});
-
-const brandData = data.brand;
 ---
 
 <BaseLayout title={`Naprawa ${brandData.name} – GSMdoctor`}>

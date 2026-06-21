@@ -61,12 +61,18 @@ export const GET_MODEL_WITH_REPAIRS = `
   }
 `;
 
-export const GET_ALL_MODEL_PATHS = `
-  query GetAllModelPaths {
+export const GET_ALL_MODELS_WITH_REPAIRS = `
+  query GetAllModelsWithRepairs {
     models(first: 1000) {
+      name
       slug
       brand {
         name
+      }
+      repairServices(first: 1000) {
+        serviceName
+        serviceDescription
+        price
       }
     }
   }

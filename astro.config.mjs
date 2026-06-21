@@ -2,6 +2,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  site: 'https://serwis.gsmdoctor.pl',
   vite: {
     plugins: [tailwindcss()],
   },
