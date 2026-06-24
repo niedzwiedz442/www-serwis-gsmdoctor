@@ -20,13 +20,13 @@ const brands = data.brands;
       <h1 class="text-4xl text-white font-bold mb-6 text-shadow-lg">
         Profesjonalna naprawa telefonów
       </h1>
-      <a href="#" class="bg-red-600 hover:bg-red-800 text-white lato-bold px-6 py-3 rounded-lg transition-colors">
+      <a href="/#kontakt" class="bg-red-600 hover:bg-red-800 text-white lato-bold px-6 py-3 rounded-lg transition-colors">
         Umów naprawę
       </a>
     </div>
   </div>
 
-  <main class="flex flex-col items-center py-12">
+  <main id="marki" class="flex flex-col items-center py-12">
     <h2 class="text-2xl font-bold mb-8 text-gray-800">Wybierz markę telefonu</h2>
     <div class="brands-grid grid grid-cols-1 sm:grid-cols-2 gap-6">
       {brands.map((brand) => (
