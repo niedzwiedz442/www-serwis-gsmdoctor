@@ -1,43 +1,70 @@
-# Astro Starter Kit: Minimal
+# 🚀 Strona WWW serwisu GSMdoctor
 
-```sh
-npm create astro@latest -- --template minimal
+Strona internetowa serwisu telefonów GSMdoctor pobierająca dane z headless CMS na stronę.
+
+![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Hygraph](https://img.shields.io/badge/Hygraph-6B46C1?style=for-the-badge&logo=graphql&logoColor=white)
+
+---
+## 📸 Demo
+**🌐 [Wypróbuj live demo](https://serwis.gsmdoctor.pl/)**
+
+---
+## 🛠 Technologie
+ | Kategoria | Technologie |
+ |-----------|-------------|
+ | **Frontend** | Astro, Tailwind CSS |
+ | **Backend** | TypeScript |
+ | **Narzędzia** | Git, Hygraph, EmailJS |
+
+---
+## 🗂️ Struktura projektu
+# Project Structure
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+www-serwis-gsmdoctor/
+├── public
+│   ├── favicon
+│   │   ├── apple-touch-icon.png
+│   │   ├── favicon-96x96.png
+│   │   ├── favicon.ico
+│   │   ├── favicon.svg
+│   │   ├── site.webmanifest
+│   │   ├── web-app-manifest-192x192.png
+│   │   └── web-app-manifest-512x512.png
+│   ├── images
+│   │   └── hero-bg.jpg
+│   └── logos
+│       ├── apple.png
+│       ├── logo-gsmdoctor.png
+│       └── samsung.png
+├── src
+│   ├── assets
+│   │   └── fonts
+│   │       └── Bitsumishi.ttf
+│   ├── components
+│   │   ├── BrandTile.astro
+│   │   ├── ContactForm.astro
+│   │   ├── Footer.astro
+│   │   └── Header.astro
+│   ├── layouts
+│   │   └── BaseLayout.astro
+│   ├── lib
+│   │   ├── hygraph.ts
+│   │   └── queries.ts
+│   ├── pages
+│   │   ├── [brand]
+│   │   │   └── [model].astro
+│   │   ├── [brand].astro
+│   │   └── index.astro
+│   └── styles
+│       ├── fonts.css
+│       └── global.css
+├── astro.config.mjs
+├── package-lock.json
+├── package.json
+├── README.md
+└── tsconfig.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
