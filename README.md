@@ -9,7 +9,7 @@ Strona internetowa serwisu telefonów GSMdoctor pobierająca dane z headless CMS
 
 ---
 ## 📸 Demo
-**🌐 [Wypróbuj live demo](https://serwis.gsmdoctor.pl/)**
+**🌐 [Wypróbuj live demo](https://serwis.gsmdoctor.pl/){:target="_blank"}**
 
 ---
 ## 🛠 Technologie
