@@ -8,16 +8,16 @@ Strona internetowa serwisu telefonów GSMdoctor pobierająca dane z headless CMS
 ![Hygraph](https://img.shields.io/badge/Hygraph-6B46C1?style=for-the-badge&logo=graphql&logoColor=white)
 
 ---
-## 📸 Demo
-**🌐 [Wypróbuj live demo](https://serwis.gsmdoctor.pl/){:target="_blank"}**
+## 🌐 Demo
+[Wypróbuj live demo](https://serwis.gsmdoctor.pl){:target="_blank"}
 
 ---
 ## 🛠 Technologie
  | Kategoria | Technologie |
  |-----------|-------------|
  | **Frontend** | Astro, Tailwind CSS |
- | **Backend** | TypeScript |
- | **Narzędzia** | Git, Hygraph, EmailJS |
+ | **Backend** | TypeScript, Hygraph |
+ | **Narzędzia** | Git, Hygraph CMS, EmailJS |
 
 ---
 ## 🗂️ Struktura projektu
