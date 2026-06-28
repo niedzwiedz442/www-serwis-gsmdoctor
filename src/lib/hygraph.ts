@@ -20,11 +20,22 @@ export async function hygraphQuery<T = Record<string, unknown>>(
   return json.data as T;
 }
 
-/** "Apple" → "apple", "Samsung Galaxy" → "samsung-galaxy" */
+const POLISH_CHAR_MAP: Record<string, string> = {
+  ą: "a", ć: "c", ę: "e", ł: "l", ń: "n",
+  ó: "o", ś: "s", ź: "z", ż: "z",
+  Ą: "A", Ć: "C", Ę: "E", Ł: "L", Ń: "N",
+  Ó: "O", Ś: "S", Ź: "Z", Ż: "Z",
+};
+
 export function toSlug(name: string): string {
   return name
+    .replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, (ch) => POLISH_CHAR_MAP[ch] ?? ch)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]/g, "");
+    .replace(/[\s_/–—]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
