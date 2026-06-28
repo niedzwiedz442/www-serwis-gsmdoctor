@@ -46,7 +46,7 @@ const { brand: brandSlug } = Astro.params;
         {brandData.models.map((model) => (
           <a
             href={`/${brandSlug}/${model.slug}`}
-            class="p-4 border border-gray-200 rounded-xl hover:border-red-500 hover:shadow-md transition-all text-center font-medium text-gray-800 hover:text-red-600"
+            class="p-4 border border-gray-200 rounded-xl bg-white hover:border-red-500 hover:shadow-md transition-all text-center font-medium text-gray-800 hover:text-red-600"
           >
             {model.name}
           </a>
