@@ -3,13 +3,37 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { hygraphQuery, toSlug } from "../lib/hygraph";
-import { GET_BRANDS } from "../lib/queries";
-import type { Brand } from "../lib/queries";
+import { getAllModelsWithRepairs } from "../lib/queries";
+import type { PhoneModel } from "../lib/queries";
+
+interface BrandPageData {
+  name: string;
+  models: { name: string; slug: string }[];
+}
 
 export async function getStaticPaths() {
-  const data = await hygraphQuery<{ brands: Brand[] }>(GET_BRANDS);
+  // Pobieramy WSZYSTKIE modele (ze pełną paginacją) i grupujemy po marce
+  // w kodzie, zamiast polegać na zagnieżdżonej relacji brand.models w
+  // Hygraph — ta relacja ma swój własny limit per-request (np. 100),
+  // niezależny od limitu na zapytaniu top-level "models", więc dla marek
+  // z dużą liczbą modeli (np. Samsung) ucinałaby listę w ten sam sposób,
+  // który wcześniej powodował 404.
+  const allModels = await getAllModelsWithRepairs(hygraphQuery);
 
-  return data.brands.map((brand) => ({
+  const brandMap = new Map<string, BrandPageData>();
+
+  for (const model of allModels) {
+    const brandName = model.brand.name;
+    if (!brandMap.has(brandName)) {
+      brandMap.set(brandName, { name: brandName, models: [] });
+    }
+    brandMap.get(brandName)!.models.push({
+      name: model.name,
+      slug: model.slug,
+    });
+  }
+
+  return Array.from(brandMap.values()).map((brand) => ({
     params: {
       brand: toSlug(brand.name),
     },
@@ -19,15 +43,13 @@ export async function getStaticPaths() {
   }));
 }
 
-const { brandData } = Astro.props as { brandData: Brand };
+const { brandData } = Astro.props as { brandData: BrandPageData };
 const { brand: brandSlug } = Astro.params;
 ---
 
 <BaseLayout title={`Naprawa ${brandData.name} – GSMdoctor`}>
   <Header />
-
   <main class="container mx-auto py-12 px-4 max-w-4xl">
-
     <nav class="text-sm text-gray-500 mb-8" aria-label="Breadcrumb">
       <a href="/" class="hover:text-red-600 transition-colors">Strona główna</a>
       <span class="mx-2">/</span>
@@ -53,8 +75,6 @@ const { brand: brandSlug } = Astro.params;
         ))}
       </div>
     )}
-
   </main>
-
   <Footer />
 </BaseLayout>

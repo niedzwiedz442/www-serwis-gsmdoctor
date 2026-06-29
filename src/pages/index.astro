@@ -5,11 +5,8 @@ import BrandTile from "../components/BrandTile.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Footer from "../components/Footer.astro";
 import { hygraphQuery, toSlug } from "../lib/hygraph";
-import { GET_BRANDS } from "../lib/queries";
-import type { Brand } from "../lib/queries";
-
-const data = await hygraphQuery<{ brands: Pick<Brand, "name">[] }>(GET_BRANDS);
-const brands = data.brands;
+import { getAllBrandsWithModels } from "../lib/queries";
+const brands = await getAllBrandsWithModels(hygraphQuery);
 ---
 
 <BaseLayout title="GSMdoctor – Profesjonalna naprawa telefonów">

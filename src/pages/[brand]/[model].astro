@@ -3,13 +3,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { hygraphQuery, toSlug } from "../../lib/hygraph";
-import { GET_ALL_MODELS_WITH_REPAIRS } from "../../lib/queries";
+import { getAllModelsWithRepairs } from "../../lib/queries";
 import type { PhoneModel } from "../../lib/queries";
 
 export async function getStaticPaths() {
-  const data = await hygraphQuery<{ models: PhoneModel[] }>(GET_ALL_MODELS_WITH_REPAIRS);
+  const models = await getAllModelsWithRepairs(hygraphQuery);
 
-  return data.models.map((model) => ({
+  return models.map((model) => ({
     params: {
       brand: toSlug(model.brand.name),
       model: model.slug,
@@ -30,9 +30,7 @@ function formatPrice(price: number): string {
 
 <BaseLayout title={`Naprawa ${phoneModel.name} – GSMdoctor`}>
   <Header />
-
   <main class="container mx-auto py-12 px-4 max-w-3xl">
-
     <nav class="text-sm text-gray-500 mb-8" aria-label="Breadcrumb">
       <a href="/" class="hover:text-red-600 transition-colors">Strona główna</a>
       <span class="mx-2">/</span>
@@ -80,15 +78,13 @@ function formatPrice(price: number): string {
     )}
 
     <div class="mt-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <a href={`/${brandSlug}`} class="text-gray-500 hover:text-gray-800 text-sm transition-colors">
+      <a href={`/${brandSlug}`} class="text-gray-500 hover:text-gray-800 text-sm transition-colors">
         ← Wróć do listy modeli
       </a>
       <a href="/#kontakt" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
         Umów naprawę
       </a>
     </div>
-
   </main>
-
   <Footer />
 </BaseLayout>
